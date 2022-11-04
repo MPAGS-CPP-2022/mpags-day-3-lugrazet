@@ -29,6 +29,7 @@ CaesarCipher::CaesarCipher(const std::string key_string): key_{0}
         }
         key_ = std::stoul(key_string);
     }
+    return;
 }
 CaesarCipher::CaesarCipher(const std::size_t key): key_{key}
 {
