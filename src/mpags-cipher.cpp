@@ -13,22 +13,14 @@ int main(int argc, char* argv[])
     // Convert the command-line arguments into a more easily usable form
     const std::vector<std::string> cmdLineArgs{argv, argv + argc};
 
-    // Options that might be set by the command-line arguments
-    bool helpRequested{false};
-    bool versionRequested{false};
-    std::string inputFile{""};
-    std::string outputFile{""};
-    std::string cipherKey{""};
-    bool encrypt{true};
-
     ProgramSettings cmdLineSettings{
-        false;
-        false;
-        "";
-        "";
-        "";
-        true;
-    }
+        false, // help
+        false, // version
+        "",  //inputFile
+        "", //outputFile
+        "", //cipherKey
+        true //encrypt
+    };
 
     // Process command line arguments
     const bool cmdLineStatus{
@@ -127,7 +119,7 @@ int main(int argc, char* argv[])
     }
 
     // Run the Caesar cipher (using the specified key and encrypt/decrypt flag) on the input text
-    std::string outputText{runCaesarCipher(cmdLineSettings.inputText, cmdLineSettings.caesarKey, cmdLineSettings.encrypt)};
+    std::string outputText{runCaesarCipher(inputText, caesarKey, cmdLineSettings.encrypt)};
 
     // Output the encrypted/decrypted text to stdout/file
     if (!cmdLineSettings.outputFile.empty()) {
