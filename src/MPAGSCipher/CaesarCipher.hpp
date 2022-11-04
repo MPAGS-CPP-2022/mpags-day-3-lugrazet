@@ -8,8 +8,8 @@ class CaesarCipher {
     std::string applyCipher(const std::string in_str, const bool encrypt)
     {
         const std::size_t truncatedKey{key_ % alphabet_.size()};
-        char processedChar{'x'};
-        std::string out_str{'x'};
+        char processedChar;
+        std::string out_str;
         for (const auto& origChar : in_str) {
             // For each character in the input text, find the corresponding position in
             // the alphabet by using an indexed loop over the alphabet container
@@ -30,7 +30,7 @@ class CaesarCipher {
                 }
             }
             // Add the new character to the output text
-            return out_str += processedChar;
+            out_str += processedChar;
         }
         return out_str;
     };
