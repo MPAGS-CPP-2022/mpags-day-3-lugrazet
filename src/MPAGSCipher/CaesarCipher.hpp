@@ -3,7 +3,7 @@
 #include <iostream>
 
 class CaesarCipher {
-public:
+  public:
     //Members
     std::string applyCipher(const std::string in_str, const bool encrypt)
     {
@@ -19,10 +19,12 @@ public:
                     // or decrypting) and determine the new character
                     // Can then break out of the loop over the alphabet
                     if (encrypt) {
-                        processedChar = alphabet_[(i + truncatedKey) % alphabet_.size()];
+                        processedChar =
+                            alphabet_[(i + truncatedKey) % alphabet_.size()];
                     } else {
-                        processedChar = alphabet_[(i + alphabet_.size() - truncatedKey) %
-                                                alphabet_.size()];
+                        processedChar =
+                            alphabet_[(i + alphabet_.size() - truncatedKey) %
+                                      alphabet_.size()];
                     }
                     break;
                 }
@@ -32,15 +34,15 @@ public:
         }
         return out_str;
     };
-    
+
     //Constructors
     explicit CaesarCipher(const std::size_t key);
     explicit CaesarCipher(const std::string key_string);
 
-private:
+  private:
     //Members
     std::size_t key_;
     const std::vector<char> alphabet_ = {
-    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-    'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+        'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
 };
