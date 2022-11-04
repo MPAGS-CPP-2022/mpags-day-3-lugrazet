@@ -25,6 +25,7 @@ CaesarCipher::CaesarCipher(const std::string key_string): key_{0}
                     << "        the supplied key (" << key_string
                     << ") could not be successfully converted" << std::endl;
             }
+            return;
         }
         key_ = std::stoul(key_string);
     }
