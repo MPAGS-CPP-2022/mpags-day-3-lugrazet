@@ -20,9 +20,4 @@ add_executable(testCaesarCipher testCaesarCipher.cpp)
 target_link_libraries(testCaesarCipher MPAGSCipher Catch)
 add_test(NAME test-CaesarCipher COMMAND testCaesarCipher)
 
-# - ProcessCommandLine test.
-add_executable(testProcessCommandLine testProcessCommandLine.cpp)
-target_link_libraries(testProcessCommandLine MPAGSCipher Catch)
-add_test(NAME test-ProcessCommandLine COMMAND testProcessCommandLine)
-
-
+set(CMAKE_CXX_STANDARD 11)

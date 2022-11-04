@@ -4,6 +4,10 @@
 #include <string>
 #include <vector>
 
+CaesarCipher::CaesarCipher(const std::size_t key) : key_{key}
+{
+}
+
 CaesarCipher::CaesarCipher(const std::string key_string): key_{0}
 {
     if (!key_string.empty()) {
@@ -24,6 +28,7 @@ CaesarCipher::CaesarCipher(const std::string key_string): key_{0}
                     << "[error] cipher key must be an unsigned long integer for Caesar cipher,\n"
                     << "        the supplied key (" << key_string
                     << ") could not be successfully converted" << std::endl;
+                return;
             }
         }
         key_ = std::stoul(key_string);
@@ -31,9 +36,6 @@ CaesarCipher::CaesarCipher(const std::string key_string): key_{0}
     return;
 }
 
-CaesarCipher::CaesarCipher(const std::size_t key): key_{key}
-{
-}
 
 std::string CaesarCipher::applyCipher(const std::string in_str, const CipherMode mode)
 {
