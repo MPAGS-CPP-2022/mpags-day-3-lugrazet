@@ -17,8 +17,12 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 # - Use our standard set of flags
 set(CMAKE_CXX_FLAGS "-Wall -Wextra -Werror -Wfatal-errors -Wshadow -pedantic")
 
-
+# - Functions for mpags-cipher
 add_subdirectory(MPAGSCipher)
+
+# - Enable testing via Testing subdirectory
+enable_testing()
+add_subdirectory(Testing)
 
 # - Declare the build of mpags-cipher main program and link the library.
 add_executable(mpags-cipher
