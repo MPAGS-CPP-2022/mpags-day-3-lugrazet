@@ -1,7 +1,7 @@
 #include "ProcessCommandLine.hpp"
-#include "RunCaesarCipher.hpp"
 #include "CaesarCipher.hpp"
 #include "TransformChar.hpp"
+#include "CipherMode.hpp"
 
 #include <cctype>
 #include <fstream>
@@ -20,7 +20,7 @@ int main(int argc, char* argv[])
         "",  //inputFile
         "", //outputFile
         "", //cipherKey
-        true //encrypt
+        CipherMode::Encrypt //encrypt
     };
 
     // Process command line arguments
@@ -91,9 +91,11 @@ int main(int argc, char* argv[])
             inputText += transformChar(inputChar);
         }
     }
+    
     // initialise CaesarCipher
-    CaesarCipher caesarCipher(cmdLineSettings.cipherKey);
-    std::string outputText{caesarCipher.applyCipher(inputText, cmdLineSettings.encrypt)};
+    CaesarCipher cipher(cmdLineSettings.cipherKey);
+    // Caesar shift the inputText
+    std::string outputText{cipher.applyCipher(inputText, cmdLineSettings.mode)};
 
     // Output the encrypted/decrypted text to stdout/file
     if (!cmdLineSettings.outputFile.empty()) {

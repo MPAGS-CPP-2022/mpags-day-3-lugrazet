@@ -30,6 +30,38 @@ CaesarCipher::CaesarCipher(const std::string key_string): key_{0}
     }
     return;
 }
+
 CaesarCipher::CaesarCipher(const std::size_t key): key_{key}
 {
+}
+
+std::string CaesarCipher::applyCipher(const std::string in_str, const CipherMode mode)
+{
+    const std::size_t truncatedKey{key_ % alphabet_.size()};
+    char processedChar;
+    std::string out_str;
+    for (const auto& origChar : in_str) {
+        // For each character in the input text, find the corresponding position in
+        // the alphabet by using an indexed loop over the alphabet container
+        for (size_t i{0}; i < alphabet_.size(); ++i) {
+            if (origChar == alphabet_[i]) {
+                // Apply the appropriate shift (depending on whether we're encrypting
+                // or decrypting) and determine the new character
+                // Can then break out of the loop over the alphabet
+                switch (mode) {
+                    case CipherMode::Encrypt:
+                        processedChar =
+                            alphabet_[(i + truncatedKey) % alphabet_.size()];
+                        break;
+                    case CipherMode::Decrypt:
+                        processedChar =
+                        alphabet_[(i + alphabet_.size() - truncatedKey) % alphabet_.size()];
+                        break;
+                }
+            }
+        }
+        // Add the new character to the output text
+        out_str += processedChar;
+    }
+    return out_str;
 }
