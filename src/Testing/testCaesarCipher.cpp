@@ -6,18 +6,27 @@
 #include "CaesarCipher.hpp"
 
 /*
-PROBLEM WITH THIS: 
-I want to check that it leaves the key at initial value when it's given a false string 
-(idk how to check it's exiting and cerr-ing but that would also work) 
-i.e. at 0. But the key information is kept private
-Might want to check that CaesarCipher.applyCaesar does what expected on a known string but that feels like a silly workaround.
+Tests: should be mostly easy to understand but here's some information.
+Test 1: Checks that reading in a negative key in a string 
+    leaves the key at 0 as expected. [Don't need to check entering in -5 immediately, 
+    because the input is either an unsigned int the string which this checks]
 
+Test 2-3 checks the caesar is occuring as we expect theoretically.
+Test 4 checks encrypt(decrypt) leavse the string untouched. 
 
-TEST_CASE("Reject non-numerical key", "[numerics]"){
-    const std::string ab{"A"};
-    REQUIRE( CaesarCipher(ab).key_ == 0 );
-}
 */
+TEST_CASE("Reject non-numerical key", "[CaesarCipher]")
+{
+    const std::vector<char> alphabet_ = {
+        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+        'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+    CaesarCipher cipher{std::string{"-5"}};
+    for (std::size_t j{0}; j < alphabet_.size(); j++) {
+        std::string s{alphabet_[j]};
+        REQUIRE(cipher.applyCipher(s, CipherMode::Encrypt) == s);
+        REQUIRE(cipher.applyCipher(s, CipherMode::Decrypt) == s);
+    }
+}
 
 TEST_CASE("Encrpyting as expected", "[CaesarCipher]")
 {

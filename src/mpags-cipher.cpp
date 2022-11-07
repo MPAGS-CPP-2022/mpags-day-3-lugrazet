@@ -13,7 +13,9 @@ int main(int argc, char* argv[])
 {
     // Convert the command-line arguments into a more easily usable form
     const std::vector<std::string> cmdLineArgs{argv, argv + argc};
-
+    for (std::size_t i{0}; i < cmdLineArgs.size(); i++) {
+        std::cout << cmdLineArgs[i] << "\n" << std::endl;
+    }
     ProgramSettings cmdLineSettings{
         false, // help
         false, // version

@@ -4,15 +4,18 @@
 
 #include "ProcessCommandLine.hpp"
 /*
-Could test that each individual flag is being falagged appropriately. I.e.
+the first 8 Tests that each individual flag is being flagged appropriately. I.e.
  -h gives  the same as --help which both change the appropriate boolean. 
 
-But it kinda just feels like a waste of time to test that? Weird. 
+Tests 9-12 check the program is flagging input errors as we expect
+
+But it kinda just feels like a waste of time to test these? 
+Unfortunately I can't think of any other appropriate tests
 */
 
 TEST_CASE("Help flag", "CmdLine")
 {
-    const std::vector<std::string> args{"-h"};
+    const std::vector<std::string> args{"./mpags-cipher", "-h"};
     ProgramSettings settings{
         false,                 // help
         false,                 // version
@@ -28,7 +31,7 @@ TEST_CASE("Help flag", "CmdLine")
 
 TEST_CASE("Help flag 2", "CmdLine")
 {
-    const std::vector<std::string> args{"--help"};
+    const std::vector<std::string> args{"./mpags-cipher", "--help"};
     ProgramSettings settings{
         false,                 // help
         false,                 // version
@@ -44,7 +47,7 @@ TEST_CASE("Help flag 2", "CmdLine")
 
 TEST_CASE("Version flag", "CmdLine")
 {
-    const std::vector<std::string> args{"-v"};
+    const std::vector<std::string> args{"./mpags-cipher", "--version"};
     ProgramSettings settings{
         false,                 // help
         false,                 // version
@@ -60,7 +63,8 @@ TEST_CASE("Version flag", "CmdLine")
 
 TEST_CASE("Input flag", "CmdLine")
 {
-    const std::vector<std::string> args{"-i", "inputFile.txt"};
+    const std::vector<std::string> args{"./mpags-cipher", "-i",
+                                        "inputFile.txt"};
     ProgramSettings settings{
         false,                 // help
         false,                 // version
@@ -76,7 +80,8 @@ TEST_CASE("Input flag", "CmdLine")
 
 TEST_CASE("output flag", "CmdLine")
 {
-    const std::vector<std::string> args{"-o", "outputFile.txt"};
+    const std::vector<std::string> args{"./mpags-cipher", "-o",
+                                        "outputFile.txt"};
     ProgramSettings settings{
         false,                 // help
         false,                 // version
@@ -87,12 +92,12 @@ TEST_CASE("output flag", "CmdLine")
     };
     processCommandLine(args, settings);
 
-    REQUIRE(settings.inputFile == "outputFile.txt");
+    REQUIRE(settings.outputFile == "outputFile.txt");
 }
 
 TEST_CASE("Cipher Key", "CmdLine")
 {
-    const std::vector<std::string> args{"-k", "5"};
+    const std::vector<std::string> args{"./mpags-cipher", "-k", "5"};
     ProgramSettings settings{
         false,                 // help
         false,                 // version
@@ -109,7 +114,7 @@ TEST_CASE("Cipher Key", "CmdLine")
 //Change the default setting else this would be redundant.
 TEST_CASE("Encrypt", "CmdLine")
 {
-    const std::vector<std::string> args{"--encrypt"};
+    const std::vector<std::string> args{"./mpags-cipher", "--encrypt"};
     ProgramSettings settings{
         false,                 // help
         false,                 // version
@@ -125,7 +130,7 @@ TEST_CASE("Encrypt", "CmdLine")
 
 TEST_CASE("Decrypt", "CmdLine")
 {
-    const std::vector<std::string> args{"--decrypt"};
+    const std::vector<std::string> args{"./mpags-cipher", "--decrypt"};
     ProgramSettings settings{
         false,                 // help
         false,                 // version
@@ -141,7 +146,7 @@ TEST_CASE("Decrypt", "CmdLine")
 
 TEST_CASE("Unknown Argument", "CmdLine")
 {
-    const std::vector<std::string> args{"-p"};
+    const std::vector<std::string> args{"./mpags-cipher", "-p"};
     ProgramSettings settings{
         false,                 // help
         false,                 // version
@@ -157,7 +162,7 @@ TEST_CASE("Unknown Argument", "CmdLine")
 
 TEST_CASE("No inputfile", "CmdLine")
 {
-    const std::vector<std::string> args{"-i"};
+    const std::vector<std::string> args{"./mpags-cipher", "-i"};
     ProgramSettings settings{
         false,                 // help
         false,                 // version
@@ -173,7 +178,7 @@ TEST_CASE("No inputfile", "CmdLine")
 
 TEST_CASE("No outputfile", "CmdLine")
 {
-    const std::vector<std::string> args{"-o"};
+    const std::vector<std::string> args{"./mpags-cipher", "-o"};
     ProgramSettings settings{
         false,                 // help
         false,                 // version
@@ -189,7 +194,7 @@ TEST_CASE("No outputfile", "CmdLine")
 
 TEST_CASE("No key", "CmdLine")
 {
-    const std::vector<std::string> args{"-k"};
+    const std::vector<std::string> args{"./mpags-cipher", "-k"};
     ProgramSettings settings{
         false,                 // help
         false,                 // version
