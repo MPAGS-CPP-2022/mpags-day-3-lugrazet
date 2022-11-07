@@ -13,16 +13,9 @@ i.e. at 0. But the key information is kept private
 Might want to check that CaesarCipher.applyCaesar does what expected on a known string but that feels like a silly workaround.
 
 
-A similar check i'd like to do would be cipher('x').key_ == cipher(x).key_ for key being any single digit character.
-i.e. check that std::stoul is working and we aren't running into weird problems.
-Idk a world where that would change but we assume it's working so its nicer to 
-just have it always checked it takes like no time at all to run. 
-Would probably do this for switch case '0', ..., '9' ?. So can steal the structure from '0' -> 'ONE' in TransformChar.  
-
-
 TEST_CASE("Reject non-numerical key", "[numerics]"){
     const std::string ab{"A"};
-    REQUIRE( CaesarCipher(ab). == 0 );
+    REQUIRE( CaesarCipher(ab).key_ == 0 );
 }
 */
 

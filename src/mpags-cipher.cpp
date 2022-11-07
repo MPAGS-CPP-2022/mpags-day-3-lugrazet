@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
 
     // Any failure in the argument processing means we can't continue
     // Use a non-zero return value to indicate failure
-    if (!cmdLineStatus) {
+    if (cmdLineStatus == false) {
         return 1;
     }
 

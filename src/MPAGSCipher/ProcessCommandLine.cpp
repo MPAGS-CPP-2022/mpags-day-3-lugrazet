@@ -4,6 +4,30 @@
 #include <string>
 #include <vector>
 
+/*
+Takes two inputs, a referenced string of arguments and referended Settings structure.
+The settings structure has already been initialised with the default settings, and 
+this program then checks each element of the argument string, evaluates it, 
+then changes data members in the settings appropriately.
+
+Returns a boolean "processStatus", True if nothing goes wrong. False if otherwise
+    Otherwise: no input file name given after -i
+               no output file name given after -o
+               inappropriate caesar key given after -k
+               unknown argument given in.
+
+The command line arguments affect the settings as follows:
+
+[-h/--help] [--version] [-i <file>] [-o <file>] [-k <key>] [--encrypt/--decrypt]
+-h|--help        bool ProgramSettings.help = true 
+--version        bool ProgramSettings.version = true
+-i FILE          string ProgramSettings.inputFile = argument after this one
+-o FILE          string ProgramSettings.outputFile = argument after this one
+-k KEY           string ProgramSettings.cipherKey = argument after this one
+--encrypt        CipherMode ProgramSettings.mode = CipherMode::Encrypt 
+--decrypt        CipherMode ProgramSettings.mode = CipherMode::Decrypt 
+*/
+
 bool processCommandLine(const std::vector<std::string>& cmdLineArgs, 
                         ProgramSettings& cmdLineSettings)
 {
