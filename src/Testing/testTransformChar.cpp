@@ -4,7 +4,9 @@
 #include "catch.hpp"
 
 #include "TransformChar.hpp"
-
+/*
+These are pretty straight forward, checking the three different 
+types of characters return the appropriate thing.*/
 TEST_CASE("Characters are uppercased", "[alphanumeric]"){
     const std::string upper{"ABCDEFGHIJKLMNOPQRSTUVWXYZ"};
     const std::string lower{"abcdefghijklmnopqrstuvwxyz"};
