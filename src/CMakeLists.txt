@@ -3,7 +3,7 @@
 
 # - Set CMake requirements then declare project
 cmake_minimum_required(VERSION 3.2)
-project(MPAGSCipher VERSION 0.2.0)
+project(MPAGSCipher VERSION 3.2.0)
 
 # - When Makefiles are generated, output all command lines by default
 #   Do this to begin with so it's easy to see what compiler command/flags
@@ -15,23 +15,17 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 # - Use our standard set of flags
+set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_FLAGS "-Wall -Wextra -Werror -Wfatal-errors -Wshadow -pedantic")
 
-# - Declare the build of mpags-cipher main program
+# - Functions for mpags-cipher
+add_subdirectory(MPAGSCipher)
+
+# - Enable testing via Testing subdirectory
+enable_testing()
+add_subdirectory(Testing)
+
+# - Declare the build of mpags-cipher main program and link the library.
 add_executable(mpags-cipher
-  mpags-cipher.cpp
-  MPAGSCipher/TransformChar.hpp
-  MPAGSCipher/TransformChar.cpp
-  MPAGSCipher/ProcessCommandLine.cpp
-  MPAGSCipher/ProcessCommandLine.hpp
-  MPAGSCipher/RunCaesarCipher.cpp
-  MPAGSCipher/RunCaesarCipher.hpp
-  )
-
-target_include_directories(mpags-cipher
-  PRIVATE MPAGSCipher
-  )
-
-target_compile_features(mpags-cipher
-  PRIVATE cxx_auto_type cxx_range_for cxx_uniform_initialization
-  )
+  mpags-cipher.cpp)
+target_link_libraries(mpags-cipher PRIVATE MPAGSCipher)
